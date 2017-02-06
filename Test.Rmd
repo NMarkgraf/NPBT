@@ -1,0 +1,70 @@
+---
+title: "Norman's Pandoc Beamer Themes"
+author: "Norman Markgraf"
+date: "06.02.2017"
+output:
+  beamer_presentation:
+    fig_caption: no
+    highlight: tango
+    keep_tex: no
+    pandoc_args:
+    - --slide-level=3
+    - -V
+    - papersize=A4
+    - -V
+    - fontsize=10pt
+    - -V
+    - lang=de
+    - -V
+    - linkcolor=darkgray
+    - -V
+    - urlcolor=blue
+    - -V
+    - theme=NPBT
+    - -V
+    - institute=Standort Köln
+  ioslides_presentation: default
+  slidy_presentation: null
+institute: Sefiroth Consulting
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = TRUE,
+    background="#A7A7A7",
+#   fig.keep="none",
+    out.width="80%",
+#   cache = TRUE,
+#    tidy=TRUE,
+    fig.align = "center"
+)
+```
+
+# Ein Theme für verschiedene Anwendungen
+
+### Wozu dieses Theme
+
+Dieses Theme entstand um mit einem Bases-Text schnell Präsentationen für verschiedene Bereiche zu erstellen.
+
+
+Für ein einfaches FOM Layout muss unter
+
+    - -V
+    - theme=NPBT
+
+Die Zeile 
+
+    - -V
+    - colortheme=FOM
+
+eingefügt werden. Für die eufom entsprechend:
+
+    - -V
+    - colortheme=EUFOM
+
+### Wie geht's es weiter?
+
+Ich versuche noch ein wenig das allgemeine FOM Layout nachzuarmen. Aber ich denke für den schnellen Einsatz ist es so schon gut genug.
+Der Kern geht diese Woche auf GitHUB. Die "Module" für die FOM etc. gibt es dann ggf. auf Anfrage ;-)
+
+
