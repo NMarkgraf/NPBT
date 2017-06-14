@@ -44,7 +44,7 @@ knitr::opts_chunk$set(
 
 ### Wozu dieses Theme
 
-Dieses Theme entstand um mit einem Bases-Text schnell Präsentationen für verschiedene Bereiche zu erstellen.
+Dieses Theme entstand um mit einem  Basis-Text schnell Präsentationen für verschiedene Bereiche zu erstellen.
 
 
 Für ein einfaches FOM Layout muss unter
@@ -57,10 +57,10 @@ Die Zeile
     - -V
     - colortheme=FOM
 
-eingefügt werden. Für die eufom entsprechend:
+eingefügt werden. 
 
-    - -V
-    - colortheme=EUFOM
+Statt FOM gibt es auch EUFOM und FOM_ifes als mögliche Formate.
+
 
 ### Wie geht's es weiter?
 

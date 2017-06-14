@@ -13,6 +13,10 @@
 \def\backgroundimage{\imagepath./hintergrund}
 \def\lineimage{\imagepath./linie}
 \def\logoimage{\imagepath./logo}
+\def\logowidth{1cm}
+\def\logoheight{1cm}
+\def\logoxshift{-0.7cm}
+\def\logoyshift{-0.7cm}
 
 % ---------------------------------------------------------------------------
 \usepackage{ragged2e} % Liefert FlushRight-Umgebung
@@ -39,8 +43,8 @@
     \node[inner sep=0pt] at (current page.center){%
               \includegraphics[width=\myPaperWidth,height=\myPaperHeight]{\backgroundimage}%
       };%
-      \node[shift={(-0.7cm,-0.7cm)},inner sep=0pt] at (current page.north east){%
-              \includegraphics[width=1cm,height=1cm]{\logoimage}%
+      \node[shift={(\logoxshift,\logoyshift)},inner sep=0pt] at (current page.north east){%
+              \includegraphics[width=\logowidth,height=\logoheight]{\logoimage}%
       };%
     \node[anchor=south east,xshift=1cm,yshift=2cm] at (current page.south east){%
           \begin{tabular}{b{0.6\myPaperWidth}}
@@ -91,9 +95,9 @@
         \lineimage%
     }%
   
-  \vspace*{-2.4em}\hspace*{0.89\paperwidth}%
+  \vspace*{-2.4em}\hspace*{\dimexpr0.9\paperwidth+\logoxshift\relax}%
   \includegraphics[%
-    width=0.99cm%
+    width=\logowidth%0.99cm%
   ]{% 
     \logoimage%
   }
