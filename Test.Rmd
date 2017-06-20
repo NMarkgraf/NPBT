@@ -65,6 +65,6 @@ Statt FOM gibt es auch EUFOM und FOM_ifes als mögliche Formate.
 ### Wie geht's es weiter?
 
 Ich versuche noch ein wenig das allgemeine FOM Layout nachzuarmen. Aber ich denke für den schnellen Einsatz ist es so schon gut genug.
-Der Kern geht diese Woche auf GitHUB. Die "Module" für die FOM etc. gibt es dann ggf. auf Anfrage ;-)
+Der Kern geht diese Woche auf GitHub. Die "Module" für die FOM etc. gibt es dann ggf. auf Anfrage ;-)
 
 

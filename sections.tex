@@ -17,6 +17,11 @@
 \def\logoheight{1cm}
 \def\logoxshift{-0.7cm}
 \def\logoyshift{-0.7cm}
+\def\titleboxwidth{0.6\myPaperWidth}
+\def\sectionpagewidth{0.5\myPaperWidth}
+\def\sectionpageheight{0.25\myPaperHeight}
+\def\subsectionpagewidth{0.5\myPaperWidth}
+\def\subsectionpageheight{0.25\myPaperHeight}
 
 % ---------------------------------------------------------------------------
 \usepackage{ragged2e} % Liefert FlushRight-Umgebung
@@ -47,7 +52,7 @@
               \includegraphics[width=\logowidth,height=\logoheight]{\logoimage}%
       };%
     \node[anchor=south east,xshift=1cm,yshift=2cm] at (current page.south east){%
-          \begin{tabular}{b{0.6\myPaperWidth}}
+          \begin{tabular}{b{\titleboxwidth}}
             {\usebeamercolor[fg]{title in titlepage}%
              \usebeamerfont{title in titlepage} \inserttitle} \\
             {\usebeamercolor[fg]{institute in titlepage}%
@@ -78,7 +83,7 @@
              \usebeamerfont{frametitle in head}%
               ~\phantom{\thesection.}\Large\insertframetitle}%
           }{% else: 
-%         \vspace*{-1em}%
+         \vspace*{-1em}%
           {\usebeamercolor[fg]{subsection in head}%
            \usebeamerfont{subsection in head}%
            \thesection.\thesubsection.~\insertsubsection}\\\vspace*{-1.1ex}%
@@ -88,20 +93,18 @@
           }       
         }
         \strut
-    \vspace*{-0.8em}
-  \includegraphics[%
-        width=0.9\paperwidth%
-      ]{%
-        \lineimage%
-    }%
+        \vspace*{-0.8em}
+        \includegraphics[%
+            width=0.9\paperwidth%
+          ]{%
+             \lineimage%
+            }%
+        \begin{tikzpicture}[remember picture, overlay]
+          \node[shift={(\logoxshift,\logoyshift)},inner sep=0pt] at (current page.north east){%
+              \includegraphics[width=\logowidth,height=\logoheight]{\logoimage}%
+        };%
+        \end{tikzpicture}
   
-  \vspace*{-2.4em}\hspace*{\dimexpr0.9\paperwidth+\logoxshift\relax}%
-  \includegraphics[%
-    width=\logowidth%0.99cm%
-  ]{% 
-    \logoimage%
-  }
-
   \end{beamercolorbox}
   }%
 }
@@ -155,7 +158,7 @@
 {
   \begin{tikzpicture}[remember picture, overlay]
     \node[anchor=south east,xshift=-1cm,yshift=1.5cm] at (current page.south east){%
-        \begin{minipage}[b][0.25\myPaperHeight][t]{0.5\myPaperWidth}
+        \begin{minipage}[b][\sectionpageheight][t]{\sectionpagewidth}
           \begin{FlushRight}
               \usebeamercolor{section title}%
               \usebeamerfont{section title}\insertsection\par
@@ -171,7 +174,7 @@
 \setbeamertemplate{subsection page}{
   \begin{tikzpicture}[remember picture, overlay]
     \node[anchor=south east,xshift=-1cm,yshift=1.5cm] at (current page.south east){%
-        \begin{minipage}[b][0.25\myPaperHeight][t]{0.5\myPaperWidth}
+        \begin{minipage}[b][\subsectionpageheight][t]{\subsectionpagewidth}
           \begin{flushright}
               \usebeamercolor{subsection title}%
               \usebeamerfont{subsection title}\insertsubsection\par
