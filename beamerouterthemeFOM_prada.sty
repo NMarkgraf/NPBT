@@ -1,47 +1,13 @@
+\ProvidesPackage{beamerouterthemeFOM_prada}[2017/06/28 v3.0 Beamer Outer Theme FOM PraDa-Version]
 % ===========================================================================
-% sections.tex
-% ============---------------------------------------------------------------
-%
-% (C) in 2017 by Norman Markgraf (nmarkgraf(at)hotmail(dot)com)
-%
-% ---------------------------------------------------------------------------
-%
+% beamerouterthemeFOM_prada.sty
+% =============================----------------------------------------------
+% 
+% (C) in 2011-2017 by Norman Markgraf (nmarkgraf(at)hotmail(dot)com)
 %
 % ---------------------------------------------------------------------------
 %
-\def\imagepath{images/}
-\def\backgroundimage{\imagepath./hintergrund}
-\def\lineimage{\imagepath./linie}
-\def\logoimage{\imagepath./logo}
-\def\logowidth{1cm}
-\def\logoheight{1cm}
-\def\logoxshift{-0.7cm}
-\def\logoyshift{-0.7cm}
-%\def\titleboxwidth{0.6\myPaperWidth}
-\def\titleboxwidth{0.5\linewidth}
-\def\sectionpagewidth{0.5\myPaperWidth}
-\def\sectionpageheight{0.25\myPaperHeight}
-\def\subsectionpagewidth{0.5\myPaperWidth}
-\def\subsectionpageheight{0.25\myPaperHeight}
-
-% ---------------------------------------------------------------------------
-
-% ---------------------------------------------------------------------------
-\usepackage{ragged2e} % Liefert FlushRight-Umgebung
-% ---------------------------------------------------------------------------
-\usepackage{ifthen}
-\usepackage{tikz}
-\usetikzlibrary{positioning}
-\usetikzlibrary{calc}
-\usetikzlibrary{backgrounds}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.3}
-\usepackage{xspace}
-\usepackage{array}
-
-%\ifstrempty{\insertinstitute}{%
-%  \institute{Standort Köln}%
-%}{\relax}
+\mode<presentation>
 % ---------------------------------------------------------------------------
 %
 % title page:
@@ -138,11 +104,6 @@
 }
 % ---------------------------------------------------------------------------
 %
-% Set color for author in footliine and header to darkgray on white:
-%
-\setbeamercolor{author in head/foot}{fg=darkgray, bg=white}
-% ---------------------------------------------------------------------------
-%
 % Footline template
 %
 \setbeamertemplate{footline}{% Skip first frame == Title frame !!!
@@ -160,9 +121,9 @@
         \newline
         {%
         ~
-        \hspace*{0.2cm}{\insertdate }{ }}%
+        \hspace*{0.2cm}\ifbool{showDateInFootline}{\insertdate }{ }}%
         \hfil
-        \insertshortauthor  \, $|$ \,  \inserttitle %
+        {\phantom{\insertshortauthor $|$} }{ \phantom{\inserttitle} }%
 
         \vspace*{-0.9em}%
         \raggedleft{\insertframenumber \hspace*{0.3cm}}%
@@ -170,47 +131,9 @@
       \vspace*{0.2cm}
     }
 }
+
 % ---------------------------------------------------------------------------
-%
-% Section page template
-%
-%\setbeamertemplate{section page}
-%{
-%    \begin{centering}
-%    \begin{beamercolorbox}[sep=12pt,center]{section title}
-%      \usebeamerfont{section title}\insertsection\par
-%    \end{beamercolorbox}
-%    \end{centering}
-%}
-\setbeamertemplate{section page}
-{
-  \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor=south east,xshift=-1cm,yshift=1.5cm] at (current page.south east){%
-        \begin{minipage}[b][\sectionpageheight][t]{\sectionpagewidth}
-          \begin{FlushRight}
-              \usebeamercolor{section title}%
-              \usebeamerfont{section title}\insertsection\par
-          \end{FlushRight}
-        \end{minipage}
-    };%
-  \end{tikzpicture}
-}
-% ---------------------------------------------------------------------------
-%
-% Subsection page template
-%
-\setbeamertemplate{subsection page}{
-  \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor=south east,xshift=-1cm,yshift=1.5cm] at (current page.south east){%
-        \begin{minipage}[b][\subsectionpageheight][t]{\subsectionpagewidth}
-          \begin{flushright}
-              \usebeamercolor{subsection title}%
-              \usebeamerfont{subsection title}\insertsubsection\par
-          \end{flushright}
-        \end{minipage}
-    };%
-  \end{tikzpicture}
-}
+\mode<all>
 %
 % ===========================================================================
 %
