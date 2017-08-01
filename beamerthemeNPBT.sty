@@ -1,4 +1,5 @@
-\ProvidesPackage{beamerthemeNPBT}[2017/06/28 v3.0 Main Beamer Theme of NPBT]
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeNPBT}[2017/07/18 v3.1 Main Beamer Theme of NPBT]
 % ===========================================================================
 % beamerthemeNPBT.sty
 % ===================---------------------------------------------------------
@@ -15,10 +16,21 @@
 % ---------------------------------------------------------------------------
 % Used Packages:
 % ---------------------------------------------------------------------------
-\RequirePackage{ifthen} 
 
+\RequirePackage{hyperref}
 % ---------------------------------------------------------------------------
 
+\hypersetup{
+    pdfinfo={
+        Tools = {NPBT rel. 3.1 2017/07/18 (C) by Norman Markgraf}
+    }
+}
+
+\def\imagepath{images/}
+\newcommand*{\makeLine}{\includegraphics[0.95\textwidth]{\imagespath./linie}}
+
+
+% ---------------------------------------------------------------------------
 \def\softness{0.8}
 
 \definecolor{softred}{rgb}{1,\softness,\softness}
@@ -100,6 +112,7 @@
 % font settings
 \usefonttheme[onlymath]{serif}
 \setbeamerfont{block title}{size={}}
+
 \usepackage{eulervm}
 \usepackage{dsfont}    		% Liefert $\mathds{N,Z,Q,R,C}$
 \usepackage[T1]{fontenc} 	% sonst wird OT1 coding ausgegeben 

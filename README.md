@@ -13,9 +13,15 @@ Zur Zeit werden die folgenden Themes unterstützt:
 **eufom** - Das Layout der [eufom](http://www.eufom.lu)
 
 
-## Was gebraucht wird
+## Wie installiert man NPBT?
 
-Um mit NPBT zu arbeiten benötiget man vor allem die *beamer*.sty* Dateien, die TeX-Dateien *mygeometry.tex* und *sections.tex*, sowie das Verzeichnis *images*. Im Verzeichnis *images* befinden sich die notwendigen Hintergründe, Logos und Linien für das entsprechende Theme.
+Am einfachsten mittels **make install** aus Systemen, die einen (GNU)make Befehl haben. Zum Beispiel Linux, Mac OS, Windows mit Rtools installiert. 
+
+Auf Windows Systemen auch mittels **install.cmd**
+
+## Wie installiert man eine neue Version / Wie 'updated' man?
+
+Einfach die aktuelle Version über die alte Version installieren!
 
 ## Wie man ein Theme aktiviert
 
@@ -71,3 +77,10 @@ Schreiben Sie mir einfach
 
 ### Spenden
 
+Wie viele Autoren von Open Source Software schreibt man an sich kleine Tools nur für sich. 
+Falls aber jemand mehr als nur Danke sagen will, so bin ich über einen kleinen Obulus sicher nicht traurig.
+
+
+### Danke!
+
+Danke an Prof. Oliver Gansser, Prof. Sebastian Sauer, Prof. Matthias Gehrke und Prof. Bianca Krol von der FOM für viele Anregungen, Hilfe, das Melden von Fehlern und aufmunternde Worte!
