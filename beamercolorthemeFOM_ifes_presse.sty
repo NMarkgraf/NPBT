@@ -1,4 +1,4 @@
-\ProvidesPackage{beamercolorthemeFOM_ifes_presse}[2017/06/28 v3.0 Beamer Color Theme FOM ifes presse-Version]
+\ProvidesPackage{beamercolorthemeFOM_ifes_presse}[2017/06/28 v3.1 Beamer Color Theme FOM ifes presse-Version]
 % ===========================================================================
 % beamercolorthemeFOM_ifes_presse.sty
 % ===================================----------------------------------------
@@ -8,105 +8,61 @@
 % ---------------------------------------------------------------------------
 %
 \mode<presentation>
-% ---------------------------------------------------------------------------
 
+% ---------------------------------------------------------------------------
+% Use Base Color Scheme by beamercolorthemeFOM!
+% ---------------------------------------------------------------------------
+\RequirePackage{beamercolorthemeFOM}
+
+% ---------------------------------------------------------------------------
+% New Font base! --> Needs to go somewhere else!!!
+% ---------------------------------------------------------------------------
 \renewcommand{\rmdefault}{phv} % Arial
 \renewcommand{\sfdefault}{phv} % Arial
 
+% ---------------------------------------------------------------------------
+% Set Path to images
+% ---------------------------------------------------------------------------
 \def\imagepath{images/FOM_ifes_presse/}
+
+% ---------------------------------------------------------------------------
+% Setup Logo - position and size
+% ---------------------------------------------------------------------------
 \def\logowidth{2.56cm}
 \def\logoheight{1.35cm}
 \def\logoxshift{-1.5cm}
 \def\logoyshift{-0.87cm}
 
 % ---------------------------------------------------------------------------
-\definecolor{fomgreen}{rgb}{0.58,0.77,0.75}
-\definecolor{fomcyan}{rgb}{.00,.60,.54}
-\definecolor{FOM}{rgb}{0,0.67,0.6}
-%\definecolor{FOMTitelColor}{RGB}{0,153,138}
-\definecolor{FOMTitelColor}{HTML}{00998A}
-\definecolor{FOMBoldColor}{HTML}{00998A}
-%\definecolor{FOMInstituteColor}{HTML}{262626} % ifes
-\definecolor{FOMInstituteColor}{HTML}{717D87} % kirchmeyer
-%\definecolor{FOMSubTitelColor}{RGB}{0,193,178}
-\definecolor{FOMSubTitelColor}{HTML}{4CB7AD}
-%\definecolor{FOMFirmColor}{RGB}{132,132,132}
-%\definecolor{FOMFirmColor}{HTML}{717D87} % ifes
-\definecolor{FOMFirmColor}{HTML}{262626} % kirchmeyer
-\definecolor{FOMForgroundColor}{HTML}{717D87}
-\definecolor{FOMWhiteColor}{HTML}{FFFFFF}
-
+% Colors & Font setting for: header
 % ---------------------------------------------------------------------------
-\setbeamercolor*{structure}{fg=fomgreen,bg=softgreen}
-\setbeamercolor{structure}{fg=FOM}
-
-% ---------------------------------------------------------------------------
-% title
-% ---------------------------------------------------------------------------
-\setbeamercolor{title in titlepage}{fg=FOMTitelColor}
-\setbeamercolor{subtitle in titlepage}{fg=FOMSubTitelColor}
-\setbeamercolor{institute in titlepage}{fg=FOMInstituteColor}
-\setbeamercolor{firm in titlepage}{fg=FOMFirmColor}
-\setbeamercolor{author in titlepage}{fg=FOMFirmColor}
-
-% ---------------------------------------------------------------------------
-\setbeamerfont{institute in titlepage}{size=\large, family=\sffamily, series=\bfseries}
-\setbeamerfont{firm in titlepage}{size=\large, family=\sffamily, series=\bfseries}
-\setbeamerfont{title in titlepage}{size=\LARGE, family=\sffamily, series=\bfseries}
-\setbeamerfont{subtitle in titlepage}{size=\LARGE, family=\sffamily, series=\bfseries}
-\setbeamerfont{author in titlepage}{size=\large, family=\sffamily, series=\bfseries}
-
-% ---------------------------------------------------------------------------
-% part title page
-% ---------------------------------------------------------------------------
-\setbeamercolor{part title}{fg=FOMTitelColor}
-
-% ---------------------------------------------------------------------------
-% section title page
-% ---------------------------------------------------------------------------
-\setbeamercolor{section name}{fg=FOMTitelColor}
-\setbeamercolor{section title}{fg=FOMTitelColor}
-% ---------------------------------------------------------------------------
-\setbeamerfont{section name}{size=\Large, family=\sffamily, series=\bfseries}
-
-% ---------------------------------------------------------------------------
-% subsection title page
-% ---------------------------------------------------------------------------
-\setbeamercolor{subsection name}{fg=FOMTitelColor}
-\setbeamercolor{subsection title}{fg=FOMTitelColor}
-% ---------------------------------------------------------------------------
-\setbeamerfont{subsection name}{size=\large, family=\sffamily, series=\bfseries}
-
-% ---------------------------------------------------------------------------
-% header
-% ---------------------------------------------------------------------------
-\setbeamercolor{myheader}{fg=FOMForgroundColor}
-\setbeamercolor{section in head}{parent=myheader}
-\setbeamercolor{subsection in head}{parent=myheader}
-\setbeamercolor{section in head}{parent=myheader, fg=FOMForgroundColor}
-\setbeamercolor{frametitle in head}{parent=myheader, fg=FOMTitelColor}
+%
+% colors
+%
 \setbeamercolor{whiteframetitle in head}{parent=myheader, fg=FOMWhiteColor}
+%
+% fonts
+%
 
 % ---------------------------------------------------------------------------
-\setbeamerfont{frametitle in head}{size=\large, family=\sffamily, series=\bfseries}
-\setbeamerfont{section in head}{size=\large, family=\sffamily, series=\mdseries}
-
+% Colors & Font setting for: footerfooter
 % ---------------------------------------------------------------------------
-% footer
-% ---------------------------------------------------------------------------
-\setbeamercolor{footer}{fg=normal text.fg}
-\setbeamercolor{author in footer}{parent=footer}
-\setbeamercolor{date in footer}{parent=footer}
+%
+% color
+%
 \setbeamercolor{copyright in footer}{parent=footer}
 \setbeamercolor{title in footer}{parent=footer}
 \setbeamercolor{framenumber in footer}{parent=footer}
+%
+% fonts
+%
 \setbeamerfont{copyright in footer}{size=\normalsize, family=\sffamily, series=\mdseries}
 \setbeamerfont{title in footer}{size=\normalsize, family=\sffamily, series=\mdseries}
 \setbeamerfont{framenumber in footer}{size=\normalsize, family=\sffamily, series=\mdseries}
 
+% ---------------------------------------------------------------------------
 %
-%
-%
+% ---------------------------------------------------------------------------
 \let\oldtextbf\textbf
 \renewcommand{\textbf}[1]{%
 \small
