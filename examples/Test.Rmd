@@ -2,30 +2,21 @@
 title: "Norman's Pandoc Beamer Themes"
 author: "Norman Markgraf"
 date: "06.02.2017"
+institute: Sefiroth Consulting
+papersize: a4
+fontsize: 10pt
+linkcolor: darkgray
+urlcolor: blue
+lang: de-DE
+slide-level: 3
+theme: NPBT
 output:
   beamer_presentation:
     fig_caption: no
     highlight: tango
     keep_tex: no
-    pandoc_args:
-    - --slide-level=3
-    - -V
-    - papersize=A4
-    - -V
-    - fontsize=10pt
-    - -V
-    - lang=de
-    - -V
-    - linkcolor=darkgray
-    - -V
-    - urlcolor=blue
-    - -V
-    - theme=NPBT
-    - -V
-    - institute=Standort Köln
   ioslides_presentation: default
   slidy_presentation: null
-institute: Sefiroth Consulting
 ---
 
 ```{r setup, include=FALSE}
