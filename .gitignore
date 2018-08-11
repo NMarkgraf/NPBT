@@ -4,3 +4,6 @@
 .Ruserdata
 build/*
 *.pdf
+NPBT/
+NPBT.ins
+NPBT.zip
