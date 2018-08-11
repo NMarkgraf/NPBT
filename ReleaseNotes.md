@@ -1,5 +1,15 @@
 # Release Notes 
 |                                                                         |
+ rel 4.0    2018/08/14 (nm) NPBT-NG.
+            Der nächste Schritt nach einer langen Zeit der Weiter-
+            entwicklung im stillen. Mit der Version 4.0 (Next Generation)
+            gehen wir auf den CTAN! VIele Teile sind verbessert worden.
+            Die Versionen für FOM, FOM_ifes und eufom sind nun stabil und
+            den aktuellen Layoutvorlagen angepasst.
+            Die Dateien "mygeometry.tex" und "section.tex" sind nun Teil
+            von "beamerthemeNTPB.sty". 
+            Nächstes Ziel: Den Code wartbarer machen!
+|                                                                         |
  rel 3.1.0  2017/07/18 (nm) Neues Installationskonzept. 
             Absofort wird das Paket NPBT nicht mehr im gleichen 
             Verzeichnis benötigt, wie die LaTex (resp. Rmd) Dokumente. 
