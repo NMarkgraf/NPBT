@@ -260,9 +260,18 @@
 % ---------------------------------------------------------------------------
 %
 \def\imagepath{images/}
-\def\backgroundimage{\imagepath{}background}
-\def\lineimage{\imagepath{}linie}   % Originale PDF-Version!
-\def\logoimage{\imagepath{}logo}
+\def\npbtBackground{background}
+\def\npbtLine{linie}
+\def\npbtLogo{logo}
+\def\npbtFrameTitleBackgound{frametitlebackgound}
+\newcommand{\updateNPBTimages}{%
+\def\backgroundimage{\imagepath\npbtBackground}
+\def\lineimage{\imagepath\npbtLine}
+\def\logoimage{\imagepath\npbtLogo}
+\def\titlebackgroundimage{\imagepath\npbtFrameTitleBackgound}
+}
+\updateNPBTimages{}
+
 \def\logowidth{1cm}
 \def\logoheight{1cm}
 \def\logoxshift{-0.7cm}
@@ -689,7 +698,7 @@
     \setbeamertemplate{frametitle}[normal]%
     \setbeamertemplate{section page}[normal]%
 }
-\setNPBTnormal{]
+\setNPBTnormal{}
 %
 \InputIfFileExists{customize_theme.tex}{\relax}{\relax}
 
