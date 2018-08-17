@@ -1,9 +1,23 @@
 # Release Notes 
 |                                                                         |
+ rel 4.1.1  2018/08/20 (nm) NPBT-NG.
+            Bugfix-Release!
+            Bei der ganzen Umstellung sind ein paar der Entwicklungen
+            aus der 3.1 Fassung nicht richtig übertragen worden.
+            Das wird mit dieser Release größtenteils behoben.
+|                                                                         |
+ rel 4.1    2018/08/16 (nm) NPBT-NG.
+            Nachdem wir nun auf CTAN gelistet sind, ist der nächste 
+            Schritt die Aufnahme in TeX Live. 
+            Dazu ist es leider nötig eine Umbennungen und Abänderungen 
+            vorzunehmen. 
+            Weiterhin ist das Ziel: Den Code wartbarer und klarer zu 
+            machen!
+|                                                                         |
  rel 4.0    2018/08/14 (nm) NPBT-NG.
             Der nächste Schritt nach einer langen Zeit der Weiter-
             entwicklung im stillen. Mit der Version 4.0 (Next Generation)
-            gehen wir auf den CTAN! VIele Teile sind verbessert worden.
+            gehen wir auf den CTAN! Viele Teile sind verbessert worden.
             Die Versionen für FOM, FOM_ifes und eufom sind nun stabil und
             den aktuellen Layoutvorlagen angepasst.
             Die Dateien "mygeometry.tex" und "section.tex" sind nun Teil

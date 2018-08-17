@@ -1,4 +1,4 @@
-\ProvidesPackage{beamercolorthemeNPBT_EUFOM}[2018/08/15 v4.1 Beamer Color Theme EUFOM]
+\ProvidesPackage{beamercolorthemeNPBT_EUFOM}[2018/08/20 v4.1.1 Beamer Color Theme EUFOM]
 % ===========================================================================
 % beamercolorthemeNPBT_EUFOM.sty
 % ==============================---------------------------------------------
@@ -14,8 +14,8 @@
 % Set Path to images
 % ---------------------------------------------------------------------------
 \def\imagepath{images/NPBT_eufom_}
+\updateNPBTimagespaths{}
 \updateNPBTimages{}
-
 
 % ---------------------------------------------------------------------------
 \definecolor{eufomred}{HTML}{8E000F}
@@ -23,6 +23,19 @@
 \definecolor{EUFOMTitelColor}{HTML}{8E000F}
 \definecolor{EUFOMInstituteColor}{HTML}{3A1518}
 \definecolor{EUFOMAuthorColor}{HTML}{1C1C1C}
+\definecolor{EUFOMSubTitelColor}{HTML}{4CB7AD}
+\definecolor{EUFOMFirmColor}{HTML}{262626} 
+% NEEDS FIXING:
+\definecolor{EUFOMForgroundColor}{HTML}{717D87}
+\definecolor{EUFOMWhiteColor}{HTML}{FFFFFF}
+\definecolor{EUFOMFrametitelColor}{HTML}{128977}
+\definecolor{EUFOMFrametitelInverseColor}{HTML}{FFFFFF}
+\definecolor{EUFOMSectionHeadlineColor}{HTML}{5E6974}
+\definecolor{EUFOMSectionTitelColor}{HTML}{128977}% sollte eigentlich sein: {00998A}
+\definecolor{EUFOMSectionNumberColor}{HTML}{262927}% oder: {32373D}
+\definecolor{EUFOMNearBlack}{HTML}{102030}
+
+
 
 % ---------------------------------------------------------------------------
 \setbeamercolor*{structure}{fg=eufomred,bg=softred}
@@ -34,11 +47,24 @@
 \setbeamercolor{part title}{fg=EUFOMTitelColor}
 
 % ---------------------------------------------------------------------------
-% title
+% Colors & Fonts setting for: titlepage
 % ---------------------------------------------------------------------------
+%
+% colors
+%
 \setbeamercolor{title in titlepage}{fg=EUFOMTitelColor}
 \setbeamercolor{institute in titlepage}{fg=EUFOMInstituteColor}
 \setbeamercolor{author in titlepage}{fg=EUFOMAuthorColor}
+\setbeamercolor{subtitle in titlepage}{fg=EUFOMSubTitelColor}
+\setbeamercolor{firm in titlepage}{fg=EUFOMFirmColor}
+%
+% fonts
+%
+\setbeamerfont{institute in titlepage}{size=\large, family=\sffamily, series=\bfseries}
+\setbeamerfont{firm in titlepage}{size=\large, family=\sffamily, series=\bfseries}
+\setbeamerfont{title in titlepage}{size=\LARGE, family=\sffamily, series=\bfseries}
+\setbeamerfont{subtitle in titlepage}{size=\LARGE, family=\sffamily, series=\bfseries}
+\setbeamerfont{author in titlepage}{size=\large, family=\sffamily, series=\bfseries}
 
 % ---------------------------------------------------------------------------
 % section title page
@@ -51,12 +77,24 @@
 \setbeamercolor{subsection name}{fg=EUFOMTitelColor}
 
 % ---------------------------------------------------------------------------
-% header
+% Colors & Font setting for: header
 % ---------------------------------------------------------------------------
-\setbeamercolor{myheader}{fg=darkgray}
+%
+% colors
+%
+\setbeamercolor{myheader}{fg=darkdray}
 \setbeamercolor{section in head}{parent=myheader}
 \setbeamercolor{subsection in head}{parent=myheader}
-\setbeamercolor{frametitle in head}{parent=myheader, fg=EUFOMTitelColor}
+\setbeamercolor{section in head}{parent=myheader, fg=EUFOMSectionHeadlineColor}
+\setbeamercolor{frametitle in head}{parent=myheader, fg=EUFOMFrametitelColor}
+\setbeamercolor{frametitle in head exercise}{parent=frametitle in head, fg=EUFOMFrametitelInverseColor}
+%
+% fonts
+%
+\setbeamerfont{frametitle in head}{size=\Large, family=\sffamily, series=\bfseries}
+\setbeamerfont{section in head}{size=\large, family=\sffamily, series=\mdseries}
+\setbeamerfont{section in head exercise}{parent=section in head}
+\setbeamercolor{myheader}{fg=darkgray}
 
 % ---------------------------------------------------------------------------
 % footer
