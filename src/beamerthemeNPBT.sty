@@ -260,9 +260,20 @@
 % ---------------------------------------------------------------------------
 %
 \def\imagepath{images/}
-\def\backgroundimage{\imagepath{}background}
-\def\lineimage{\imagepath{}linie}   % Originale PDF-Version!
-\def\logoimage{\imagepath{}logo}
+
+\def\npbtBackground{background}
+\def\npbtLine{linie}
+\def\npbtLogo{logo}
+\def\npbtFrameTitleBackgound{frametitlebackground}
+
+\newcommand{\updateNPBTimages}{%
+	\def\backgroundimage{\imagepath\npbtBackground}
+	\def\lineimage{\imagepath\npbtLine}
+	\def\logoimage{\imagepath\npbtLogo}
+	\def\titlebackgroundimage{\imagepath\npbtFrameTitleBackgound}
+}
+\updateNPBTimages{}
+
 \def\logowidth{1cm}
 \def\logoheight{1cm}
 \def\logoxshift{-0.7cm}
@@ -435,8 +446,8 @@
   \npbtexercisemodefalse%
   \makeatletter%
   \expandarg%
-  \IfSubStr*{\beamer@frametitle}{bung}{FOUND!\npbtexercisemodetrue}{NONE}%
-  \IfBeginWith*{\beamer@frametitle}{Offene}{FOUND!\npbtexercisemodetrue}{NONE}%
+  \IfSubStr*{\beamer@frametitle}{bung}{\npbtexercisemodetrue}{\relax}%
+  \IfBeginWith*{\beamer@frametitle}{Offene}{\npbtexercisemodetrue}{\relax}%
   \makeatother%
   \savebox{\myftbox}{%
       \ifnpbtexercisemode\usebeamercolor[fg]{frametitle in head exercise}\else\usebeamercolor[fg]{frametitle in head}\fi%
@@ -689,7 +700,7 @@
     \setbeamertemplate{frametitle}[normal]%
     \setbeamertemplate{section page}[normal]%
 }
-\setNPBTnormal{]
+\setNPBTnormal{}
 %
 \InputIfFileExists{customize_theme.tex}{\relax}{\relax}
 

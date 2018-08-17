@@ -16,8 +16,8 @@ PKGBUILD=$(BUILD)/$(PKGNAME)
 
 build:
 	mkdir $(PKGBUILD)
-	echo "cp -R $(SRC)/* $(PKGBUILD)"
 	cp -R $(SRC)/* $(PKGBUILD)
+	zip 
 
 clean:
 	rm -r $(PKGBUILD)
