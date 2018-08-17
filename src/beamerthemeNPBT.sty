@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemeNPBT}[2018/08/15 v4.0 Main Beamer Theme of NPBT]
+\ProvidesPackage{beamerthemeNPBT}[2018/08/20 v4.1.1 Main Beamer Theme of NPBT]
 % ===========================================================================
 % beamerthemeNPBT.sty
 % ===================---------------------------------------------------------
@@ -266,21 +266,20 @@
 \def\npbtLogo{logo}
 \def\npbtFrameTitleBackgound{frametitlebackground}
 
-\newcommand{\updateNPBTimages}{%
+\newcommand{\updateNPBTimagespaths}{%
 	\def\backgroundimage{\imagepath\npbtBackground}
 	\def\lineimage{\imagepath\npbtLine}
 	\def\logoimage{\imagepath\npbtLogo}
-	\def\titlebackgroundimage{\imagepath\npbtFrameTitleBackgound}
+	\def\frametitlebackgroundimage{\imagepath\npbtFrameTitleBackgound}
 }
-\updateNPBTimages{}
+\updateNPBTimagespaths{}
 
 \def\logowidth{1cm}
 \def\logoheight{1cm}
 \def\logoxshift{-0.7cm}
 \def\logoyshift{-0.7cm}
-%\def\titleboxwidth{0.6\myPaperWidth}
+%
 \def\titleboxwidth{0.5\linewidth}
-%\def\sectiontitleboxwidth{0.75\myPaperWidth}
 \def\sectiontitleboxwidth{0.75\linewidth}
 \def\sectionpagewidth{0.5\myPaperWidth}
 \def\sectionpageheight{0.25\myPaperHeight}
@@ -316,6 +315,12 @@
 %  \institute{Standort Köln}%
 %}{\relax}
 
+% ---------------------------------------------------------------------------
+%
+% Übungen und offene Übungen haben bei der FOM einen etwas anderen 
+% Hintergrund beim Frametitle. Hier wird ein Schalter dazu erzeugt und
+% und auf die normale Darstellun (false) gesetzt.
+%
 \newif\ifnpbtexercisemode
 \npbtexercisemodefalse
 %  \npbtexercisemodetrue
@@ -323,14 +328,32 @@
 
 % ---------------------------------------------------------------------------
 %
+% Die sich regelmässig wiederholenden Bildelemente werden in pgf gespeichert
+% und wiederverwendet. Dazu werden die folgenden Bezeichner verwendet:
+%
+% npbtlogo                :
+% npbtlogoline            :
+% npbtalternativelogoline :
+%
+% Mit dem Befehl "\updateNPBTimages" werden diese Bezeichner auf die aktuellen
+% Werte gesetzt, falls diese durch themes geändert werden/wurden.
+%
+\newcommand*{\updateNPBTimages}{%
+  \pgfdeclareimage[width=1.4\logowidth,height=1.4\logoheight]{npbtlogo}{\logoimage}
+  \pgfdeclareimage[width=0.86\paperwidth]{npbtlogoline}{\lineimage}
+  \pgfdeclareimage[width=0.86\paperwidth, height=1.25em]{npbtalternativelogoline}{\frametitlebackgroundimage}
+}
+
+\updateNPBTimagespaths{}
+\updateNPBTimages{}
+
+% ---------------------------------------------------------------------------
+%
 % logoline
 %
+
 \newcommand{\logoline}{%
-  \includegraphics[%
-           width=0.86\paperwidth%
-        ]{%
-           \lineimage%
-        }%
+  \pgfuseimage{npbtlogoline}
 }
 
 \newcommand{\putLogo}{%
@@ -338,7 +361,7 @@
     shift={(\logoxshift,\logoyshift)},
     inner sep=0pt
   ] at (current page.north east){%
-      \includegraphics[width=\logowidth,height=\logoheight]{\logoimage}%
+      \pgfuseimage{npbtlogo}
   };%
 }
 
@@ -380,6 +403,7 @@
       yshift=3.65cm
     ] at (current page.south east){%
         \begin{minipage}[b]{\titleboxwidth}
+            \addtolength{\baselineskip}{1.5ex} 
             \begin{flushright} % XXXX
                 {\usebeamercolor[fg]{title in titlepage}%
                  \usebeamerfont{title in titlepage} \inserttitle}
@@ -403,25 +427,31 @@
 \defbeamertemplate{headline}{sectioninhead}{%
   \nointerlineskip%
   \begin{beamercolorbox}[%
-      ht=3.00em, %3.25em, %
-      sep=0pt, %
+      %ht=3.00em, %3.25em, %3em sollten eigentlich etwa 1,29168ex sein
+      ht=6.0ex,
+      dp=1ex,
+      sep=0.1pt, %
       leftskip=\myleftskip, %
       rightskip=\myrightskip, %
   ]{headline}
     {%
+      \vspace*{3ex}% Keine Ahnung wieso, aber ...
+      \vspace*{-4.5ex}% ... es hat den Effekt, den ich haben will.
       \usebeamercolor[fg]{section in head}%
       \usebeamerfont{section in head}%
       \thesection.~\NoHyper\insertsection\endNoHyper\phantom{X}%
     }%
-  \end{beamercolorbox}
-  % Hier gehört die Kapitelbezeichnung rein!
+  \end{beamercolorbox}%
+  \nointerlineskip%
+% Hier gehört die Kapitelbezeichnung rein!
 }
 
 \defbeamertemplate{headline}{nosectioninhead}{%
   \nointerlineskip%
   \begin{beamercolorbox}[%
-      ht=3.00em, %3.25em, %
-      sep=0pt, %
+      ht=6.0ex,
+      dp=1ex,
+      sep=0.1pt, %
       leftskip=\myleftskip, %
       rightskip=\myrightskip, %
   ]{headline}
@@ -446,8 +476,8 @@
   \npbtexercisemodefalse%
   \makeatletter%
   \expandarg%
-  \IfSubStr*{\beamer@frametitle}{bung}{\npbtexercisemodetrue}{\relax}%
-  \IfBeginWith*{\beamer@frametitle}{Offene}{\npbtexercisemodetrue}{\relax}%
+  \IfSubStr*{\beamer@frametitle}{bung}{\npbtexercisemodetrue}{}%
+  \IfBeginWith*{\beamer@frametitle}{Offene}{\npbtexercisemodetrue}{}%
   \makeatother%
   \savebox{\myftbox}{%
       \ifnpbtexercisemode\usebeamercolor[fg]{frametitle in head exercise}\else\usebeamercolor[fg]{frametitle in head}\fi%
@@ -456,10 +486,7 @@
   \ifnpbtexercisemode{%
     \begin{tikzpicture}[remember picture, overlay]
         \node[anchor=west, inner sep=0pt, yshift=-\logoheight+5pt] at (current page.north west){%
-            \includegraphics[%
-                width=0.86\paperwidth,%
-                height=1.25em
-            ]{\titlebackgroundimage}%
+            \pgfuseimage{npbtalternativelogoline}
           };%
     \end{tikzpicture}%
     \vskip-43pt%
@@ -581,7 +608,7 @@
         \begin{minipage}[b][\sectionpageheight][t]{\sectionpagewidth}
           \begin{FlushRight}
               \usebeamercolor{sectionnumber title}%
-              \usebeamerfont{sectionnumber title}\insertsectionheadnumber %
+              \usebeamerfont{sectionnumber title}\insertsectionnumber %
               \usebeamercolor{section title}%
               \usebeamerfont{section title}\insertsectionhead\par
           \end{FlushRight}
@@ -606,7 +633,7 @@
         \begin{minipage}[b][\sectionpageheight][t]{\sectionpagewidth}
           \begin{FlushRight}
               \usebeamercolor{sectionnumber title}%
-              \usebeamerfont{sectionnumber title}\insertsubsectionheadnumber %
+              \usebeamerfont{sectionnumber title}\insertsubsectionnumber %
               \usebeamercolor{section title}%
               \usebeamerfont{section title}\insertsubsectionhead\par
           \end{FlushRight}
@@ -674,6 +701,7 @@
   %
   \insertnote
 }
+
 %
 % ---------------------------------------------------------------------------
 % Minimal Setup
