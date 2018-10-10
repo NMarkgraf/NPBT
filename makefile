@@ -28,6 +28,10 @@ build-examples: build
 build:
 	mkdir $(PKGBUILD)
 	cp -R $(SRC)/* $(PKGBUILD)
+	cp ReleaseNotes.md $(PKGBUILD)
+	cp README.md $(PKGBUILD)
+	cd $(PKGBUILD); pandoc -i README.md -o README.html
+	cd $(PKGBUILD); pandoc -i ReleaseNotes.md -o ReleaseNotes.html
 	cd $(PKGBUILD); sed -i -e "s_YYYY/MM/DD vX.X.X_$(RELDATE) $(RELEASE)_g" *.sty; rm *.sty-e
 	cd $(BUILD); zip -r $(PKGNAME)-$(RELEASE).zip $(PKGNAME)-$(RELEASE)
 
