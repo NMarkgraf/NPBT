@@ -12,19 +12,32 @@ MAKEFILEVERSION=2.0
 PKGNAME=beamertheme-npbt
 SRC=src
 BUILD=build
+EXAMPLE=examples
 PKGBUILD=$(BUILD)/$(PKGNAME)
+EXBUILD=$(BUILD)/$(EXAMPLE)
+
+build-examples:
+	mkdir $(EXBUILD)
+	cp -R $(SRC)/* $(EXBUILD)
+	cp -R $(EXAMPLE)/* $(EXBUILD)
 
 build:
 	mkdir $(PKGBUILD)
 	cp -R $(SRC)/* $(PKGBUILD)
 	zip 
 
-clean:
+clean-build:
 	rm -r $(PKGBUILD)
+
+clean-examples:
+	rm -r $(EXBUILD)
+
+clean: clean-build clean-examples
+	echo "Done."
 
 # --------------------------------------------------------------------------------------
 #
-.PHONY: build clean
+.PHONY: build build-examples clean
 
 # --------------------------------------------------------------------------------------
 # EoF
