@@ -8,12 +8,12 @@ MAKEFILEVERSION=2.0
 #
 # ######################################################################################
 
-
+RELEASE=v4.1.2
 PKGNAME=beamertheme-npbt
 SRC=src
 BUILD=build
 EXAMPLE=examples
-PKGBUILD=$(BUILD)/$(PKGNAME)
+PKGBUILD=$(BUILD)/$(PKGNAME)-$(RELEASE)
 EXBUILD=$(BUILD)/$(EXAMPLE)
 RSCRIPT=Rscript
 
@@ -26,7 +26,7 @@ build-examples:
 build:
 	mkdir $(PKGBUILD)
 	cp -R $(SRC)/* $(PKGBUILD)
-	zip 
+	cd $(BUILD); zip -r $(PKGNAME)-$(RELEASE).zip $(PKGNAME)-$(RELEASE)
 
 clean-build:
 	rm -r $(PKGBUILD)
