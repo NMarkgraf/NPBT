@@ -10,6 +10,7 @@ urlcolor: blue
 lang: de-DE
 slide-level: 3
 theme: NPBT
+colortheme: NPBT-FOM-ifes
 output:
   beamer_presentation:
     fig_caption: no

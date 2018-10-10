@@ -15,11 +15,13 @@ BUILD=build
 EXAMPLE=examples
 PKGBUILD=$(BUILD)/$(PKGNAME)
 EXBUILD=$(BUILD)/$(EXAMPLE)
+RSCRIPT=Rscript
 
 build-examples:
 	mkdir $(EXBUILD)
 	cp -R $(SRC)/* $(EXBUILD)
 	cp -R $(EXAMPLE)/* $(EXBUILD)
+	cd $(EXBUILD); $(RSCRIPT) ./render_tests.R
 
 build:
 	mkdir $(PKGBUILD)

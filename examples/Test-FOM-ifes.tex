@@ -1,0 +1,191 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[10pt,ngerman,a4paper,ignorenonframetext,]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+\usetheme[]{NPBT}
+\usecolortheme{NPBT-FOM-ifes}
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Norman's Pandoc Beamer Themes},
+            pdfauthor={Norman Markgraf},
+            colorlinks=true,
+            linkcolor=darkgray,
+            citecolor=Blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\newif\ifbibliography
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{part title}
+  \usebeamerfont{part title}\insertpart\par
+\end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+\centering
+\begin{beamercolorbox}[sep=12pt,center]{part title}
+  \usebeamerfont{section title}\insertsection\par
+\end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{part title}
+  \usebeamerfont{subsection title}\insertsubsection\par
+\end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=ngerman]{babel}
+\else
+  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{german}
+\fi
+
+\title{Norman's Pandoc Beamer Themes}
+\author{Norman Markgraf}
+\providecommand{\institute}[1]{}
+\institute{Sefiroth Consulting}
+\date{06.02.2017}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ein-theme-fur-verschiedene-anwendungen}{%
+\section{Ein Theme für verschiedene
+Anwendungen}\label{ein-theme-fur-verschiedene-anwendungen}}
+
+\begin{frame}[fragile]{Wozu dieses Theme}
+\protect\hypertarget{wozu-dieses-theme}{}
+
+Dieses Theme entstand um mit einem Basis-Text schnell Präsentationen für
+verschiedene Bereiche zu erstellen.
+
+Für ein einfaches FOM Layout muss unter
+
+\begin{verbatim}
+- -V
+- theme=NPBT
+\end{verbatim}
+
+Die Zeile
+
+\begin{verbatim}
+- -V
+- colortheme=NPBT-FOM
+\end{verbatim}
+
+eingefügt werden.
+
+Statt \texttt{NPBT-FOM} gibt es auch \texttt{NPBT-EUFOM} und
+\texttt{NPBT-FOM-ifes} als mögliche Farbthemen.
+
+\end{frame}
+
+\begin{frame}{Wie geht's es weiter?}
+\protect\hypertarget{wie-gehts-es-weiter}{}
+
+Ich versuche noch ein wenig das allgemeine FOM Layout nachzuarmen. Aber
+ich denke für den schnellen Einsatz ist es so schon gut genug. Der Kern
+geht diese Woche auf GitHub. Die ``Module'' für die FOM etc. gibt es
+dann ggf. auf Anfrage ;-)
+
+\end{frame}
+
+\hypertarget{ein-theme-fur-verschiedene-anwendungen-1}{%
+\section{Ein Theme für verschiedene
+Anwendungen}\label{ein-theme-fur-verschiedene-anwendungen-1}}
+
+\begin{frame}[fragile]{Wozu dieses Theme}
+\protect\hypertarget{wozu-dieses-theme-1}{}
+
+Dieses Theme entstand um mit einem Basis-Text schnell Präsentationen für
+verschiedene Bereiche zu erstellen.
+
+Für ein einfaches FOM Layout muss unter
+
+\begin{verbatim}
+- -V
+- theme=NPBT
+\end{verbatim}
+
+Die Zeile
+
+\begin{verbatim}
+- -V
+- colortheme=FOM
+\end{verbatim}
+
+eingefügt werden.
+
+Statt FOM gibt es auch EUFOM und FOM\_ifes als mögliche Formate.
+
+\end{frame}
+
+\begin{frame}{Wie geht's es weiter?}
+\protect\hypertarget{wie-gehts-es-weiter-1}{}
+
+Ich versuche noch ein wenig das allgemeine FOM Layout nachzuarmen. Aber
+ich denke für den schnellen Einsatz ist es so schon gut genug. Der Kern
+geht diese Woche auf GitHub. Die ``Module'' für die FOM etc. gibt es
+dann ggf. auf Anfrage ;-)
+
+\end{frame}
+
+\end{document}
