@@ -15,6 +15,8 @@ Zur Zeit werden die folgenden Themes unterstützt:
 
 ## Wie installiert man NPBT?
 
+...NOCH NICHT IMPLEMENTIERT...
+
 Am einfachsten mittels **make install** aus Systemen, die einen (GNU)make Befehl haben. Zum Beispiel Linux, Mac OS, Windows mit Rtools installiert. 
 
 Auf Windows Systemen auch mittels **install.cmd**
@@ -34,17 +36,17 @@ Im YAML Block zu Beginn der Preäsentation muss man im Abschnitt "output -> beam
 Im Anschluss kann man die einzelnen Farbschemate für die unterschiedlichen Themes wählen:
 
     - - V
-    - colortheme=FOM
+    - colortheme=NPBT-FOM
     
 oder
 
     - - V
-    - colortheme=FOM_ifes
+    - colortheme=NPBT-FOM-ifes
 
 oder
 
     - - V
-    - colortheme=EUFOM
+    - colortheme=NPBT-EUFOM
 
 
 Damit sieht der Block z.B. wie folgt aus:
@@ -67,7 +69,7 @@ output:
     - -V
     - theme=NPBT
     - -V
-    - colortheme=FOM
+    - colortheme=NPBT-FOM
 ```
 
 ### Fragen, Anmerkungen und Kritik?

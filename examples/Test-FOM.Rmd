@@ -1,0 +1,36 @@
+---
+title: "Norman's Pandoc Beamer Themes"
+author: "Norman Markgraf"
+date: "06.02.2017"
+institute: Sefiroth Consulting
+papersize: a4
+fontsize: 10pt
+linkcolor: darkgray
+urlcolor: blue
+lang: de-DE
+slide-level: 3
+theme: NPBT
+colortheme: NPBT-FOM
+output:
+  beamer_presentation:
+    fig_caption: no
+    highlight: tango
+    keep_tex: no
+  ioslides_presentation: default
+  slidy_presentation: null
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = TRUE,
+    background="#A7A7A7",
+#   fig.keep="none",
+    out.width="80%",
+#   cache = TRUE,
+#    tidy=TRUE,
+    fig.align = "center"
+)
+```
+
+```{r child="Test-Main.Rmd"}
+```
