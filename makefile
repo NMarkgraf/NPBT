@@ -2,13 +2,15 @@
 # Makefile (C) in 2018 by Norman Markgraf
 # ========
 # Version 2.0 	nm (15. Aug. 2018) 	New first release
-MAKEFILEVERSION=2.0
+# Version 2.1 	nm (10. Okt. 2018) 	some updates
+MAKEFILEVERSION=2.1
 #
 # 
 #
 # ######################################################################################
-
-RELEASE=v4.1.2
+RELEASE="v4.1.2"
+RELDATE="2018/10/10"
+# ######################################################################################
 PKGNAME=beamertheme-npbt
 SRC=src
 BUILD=build
@@ -17,22 +19,23 @@ PKGBUILD=$(BUILD)/$(PKGNAME)-$(RELEASE)
 EXBUILD=$(BUILD)/$(EXAMPLE)
 RSCRIPT=Rscript
 
-build-examples:
+build-examples: build
 	mkdir $(EXBUILD)
-	cp -R $(SRC)/* $(EXBUILD)
+	cp -R $(PKGBUILD)/* $(EXBUILD)
 	cp -R $(EXAMPLE)/* $(EXBUILD)
 	cd $(EXBUILD); $(RSCRIPT) ./render_tests.R
 
 build:
 	mkdir $(PKGBUILD)
 	cp -R $(SRC)/* $(PKGBUILD)
+	cd $(PKGBUILD); sed -i -e "s_YYYY/MM/DD vX.X.X_$(RELDATE) $(RELEASE)_g" *.sty; rm *.sty-e
 	cd $(BUILD); zip -r $(PKGNAME)-$(RELEASE).zip $(PKGNAME)-$(RELEASE)
 
 clean-build:
-	rm -r $(PKGBUILD)
+	-rm -r $(PKGBUILD)
 
 clean-examples:
-	rm -r $(EXBUILD)
+	-rm -r $(EXBUILD)
 
 clean: clean-build clean-examples
 	echo "Done."
