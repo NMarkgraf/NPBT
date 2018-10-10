@@ -20,9 +20,9 @@ EXBUILD=$(BUILD)/$(EXAMPLE)
 RSCRIPT=Rscript
 
 build-examples: build
-	mkdir $(EXBUILD)
-	cp -R $(PKGBUILD)/* $(EXBUILD)
-	cp -R $(EXAMPLE)/* $(EXBUILD)
+	mkdir --mode=a=wrx $(EXBUILD)
+	cp -R --no-preserve=all $(PKGBUILD)/* $(EXBUILD)
+	cp -R --no-preserve=all $(EXAMPLE)/* $(EXBUILD)
 	cd $(EXBUILD); $(RSCRIPT) ./render_tests.R
 
 build:
@@ -39,12 +39,17 @@ build:
 
 clean-build:
 	if [ -d $(PKGBUILD) ]; then rm -r $(PKGBUILD); fi
+	if [ -f $(BUILD)/$(PKGNAME)-$(RELEASE).zip ]; then rm -r $(BUILD)/$(PKGNAME)-$(RELEASE).zip; fi
 
 clean-examples:
 	if [ -d $(EXBUILD) ]; then rm -r $(EXBUILD); fi
 
 clean: clean-build clean-examples
 	@echo "Done."
+
+proper-build: clean-build
+	if [ -f $(BUILD)/$(PKGNAME)-$(RELEASE).zip ]; then rm -r $(BUILD)/$(PKGNAME)-$(RELEASE).zip; fi
+
 
 # --------------------------------------------------------------------------------------
 #
