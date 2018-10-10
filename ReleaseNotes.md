@@ -1,5 +1,17 @@
 # Release Notes 
 |                                                                         |
+ rel 4.1.2  2018/10/10 (nm) NPBT-NG.
+            Bugfix-Release!
+            Weg mit den Unterstrichen in den Dateinamen. Diese sorgen 
+            leider für viele Probleme. Daher alles auf das Minuszeichen
+            umgestellt.
+            Makefile erweitert, es generiert nun die aktuellen Releases
+            Weiterhin schreibt es Release-Datum und -Nummer in die
+            Quelldateien bevor es diese in eine ZIP Datei archiviert.
+            Das erleichtert den "Build-Process" deutlich.
+            Aber nun müssen alle Release Daten im Makefile angepasst 
+            werden.
+|                                                                         |
  rel 4.1.1  2018/08/20 (nm) NPBT-NG.
             Bugfix-Release!
             Bei der ganzen Umstellung sind ein paar der Entwicklungen
