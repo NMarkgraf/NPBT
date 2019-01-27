@@ -10,6 +10,7 @@ urlcolor: blue
 lang: de-DE
 slide-level: 3
 theme: NPBT
+outertheme: NPBT-FOM-ifes
 colortheme: NPBT-FOM-ifes
 output:
   beamer_presentation:
@@ -34,33 +35,3 @@ knitr::opts_chunk$set(
 
 ```{r child="Test-Main.Rmd"}
 ```
-
-
-# Ein Theme für verschiedene Anwendungen
-
-### Wozu dieses Theme
-
-Dieses Theme entstand um mit einem  Basis-Text schnell Präsentationen für verschiedene Bereiche zu erstellen.
-
-
-Für ein einfaches FOM Layout muss unter
-
-    - -V
-    - theme=NPBT
-
-Die Zeile 
-
-    - -V
-    - colortheme=FOM
-
-eingefügt werden. 
-
-Statt FOM gibt es auch EUFOM und FOM_ifes als mögliche Formate.
-
-
-### Wie geht's es weiter?
-
-Ich versuche noch ein wenig das allgemeine FOM Layout nachzuarmen. Aber ich denke für den schnellen Einsatz ist es so schon gut genug.
-Der Kern geht diese Woche auf GitHub. Die "Module" für die FOM etc. gibt es dann ggf. auf Anfrage ;-)
-
-

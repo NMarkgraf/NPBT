@@ -4,7 +4,7 @@
 % beamerthemeNPBT.sty
 % ===================---------------------------------------------------------
 % 
-% (C) in 2017/18 by Norman Markgraf (nmarkgraf(at)hotmail(dot)com)
+% (C) in 2017-19 by Norman Markgraf (nmarkgraf(at)hotmail(dot)com)
 %
 % NPBT <-> Norman's Pandoc Beamer Theme -> NPBT 
 % ----     =        =      =      =
@@ -18,6 +18,7 @@
 % ---------------------------------------------------------------------------
 \RequirePackage{ifthen} 
 \RequirePackage{multicol} % Für das zweispaltige TOC.
+\RequirePackage{calc}
 % ---------------------------------------------------------------------------
 
 \def\softness{0.8}
@@ -76,12 +77,14 @@
 \setbeamercolor{section in head}{parent=myheader}
 \setbeamercolor{subsection in head}{parent=myheader}
 \setbeamercolor{frametitle in head}{parent=myheader, fg=NPBTTitelColor}
+\setbeamercolor{frametitle in head exercise}{parent=myheader, bg=NPBTTitelColor, fg=white}
 
 % ---------------------------------------------------------------------------
 \setbeamerfont{myheader}{}
 \setbeamerfont{section in head}{parent=myheader}
 \setbeamerfont{subsection in head}{parent=myheader}
 \setbeamerfont{frametitle in head}{parent=myheader}
+\setbeamerfont{frametitle in head exercise}{parent=myheader}
 
 % ---------------------------------------------------------------------------
 \setbeamercolor{footer}{fg=normal text.fg}
@@ -201,17 +204,54 @@
 \fi
 
 % = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-
-% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-% was: mygeometry.tex
-% ===================--------------------------------------------------------
 %
-% (C) in 2017/18 by Norman Markgraf (nmarkgraf(at)hotmail(dot)com)
+% Schauen wir uns mal die Einstellungen von beamer an und ändern das ggf.
 %
 % ---------------------------------------------------------------------------
 %
 \newlength{\myPaperWidth}
 \newlength{\myPaperHeight}
+
+\setlength{\myPaperWidth}{160mm}
+\setlength{\myPaperHeight}{120mm}
+
+\makeatletter
+%\beamer@paperwidth
+%\beamer@paperheight
+\ifthenelse{\lengthtest{\beamer@paperwidth = 16.00cm}}{%
+    % 16 zu ...
+    \setlength{\myPaperWidth}{224mm}
+    \ifthenelse{\lengthtest{\beamer@paperheight = 10.0cm}}{
+        % 16:10
+        \setlength{\myPaperHeight}{140mm}
+        \typeout{Set ScreenRatio to 16:10 (224x140)}
+    }{%
+        % 16:9
+        \setlength{\myPaperHeight}{126mm}
+        \typeout{Set ScreenRatio to 16:9 (224x126)}
+    }
+    \setlength{\beamer@paperwidth}{\myPaperWidth}
+    \setlength{\beamer@paperheight}{\myPaperWidth}
+}{%
+    % nicht 16 zu ...
+    \ifthenelse{\lengthtest{\beamer@paperwidth = 12.80cm}}{%
+    % 4:3 ?
+    }{
+        \ifthenelse{\lengthtest{\beamer@paperheight = 9.60cm}}{%
+            % 4:3 !
+            \setlength{\myPaperWidth}{160mm}
+    	    \setlength{\myPaperHeight}{120mm}
+    	    \setlength{\beamer@paperwidth}{\myPaperWidth}
+    	    \setlength{\beamer@paperheight}{\myPaperWidth}
+    	    \typeout{Set ScreenRatio to 4:3 (160x120)}
+        }{%
+            \relax
+        }
+    }
+    
+}
+\makeatother
+\geometry{paperwidth=\myPaperWidth,paperheight=\myPaperHeight}
 
 \newcommand*{\setScreenRatio}[1]{%
 %
@@ -226,6 +266,10 @@
 	\setlength{\myPaperWidth}{160mm}
 	\setlength{\myPaperHeight}{120mm}
 	\typeout{Set ScreenRatio to 4:3 (160x120)}
+	% Powerpoint-Layout
+	\setlength{\myPaperWidth}{254mm}
+	\setlength{\myPaperHeight}{191mm}
+	\typeout{Set ScreenRatio to 4:3 (254x191)}
 }{
     \ifthenelse{\equal{#1}{16x9}}{%
 %	\ifstrequal{#1}{16x9}{%
@@ -243,7 +287,7 @@
 \geometry{paperwidth=\myPaperWidth,paperheight=\myPaperHeight}
 }
 
-\setScreenRatio{4x3}
+%\setScreenRatio{4x3}
 
 \def\footlinesize{\scriptsize} % \tiny\footnotesize\scriptsize
 %
@@ -262,22 +306,18 @@
 \def\imagepath{images/NPBT-SC-}
 
 \def\npbtBackground{background}
-\def\npbtLine{linie}
 \def\npbtLogo{logo}
-\def\npbtFrameTitleBackgound{frametitlebackground}
 
 \newcommand{\updateNPBTimagespaths}{%
 	\def\backgroundimage{\imagepath\npbtBackground}
-	\def\lineimage{\imagepath\npbtLine}
 	\def\logoimage{\imagepath\npbtLogo}
-	\def\frametitlebackgroundimage{\imagepath\npbtFrameTitleBackgound}
 }
 \updateNPBTimagespaths{}
 
 \def\logowidth{1cm}
 \def\logoheight{1cm}
-\def\logoxshift{-0.7cm}
-\def\logoyshift{-0.7cm}
+\def\logoxshift{-0.78cm}
+\def\logoyshift{-0.82cm}
 %
 \def\titleboxwidth{0.5\linewidth}
 \def\sectiontitleboxwidth{0.75\linewidth}
@@ -292,6 +332,7 @@
 
 % My FrameTitleBox ...
 \newsavebox{\myftbox}
+\newsavebox{\maxheightbox}
 \newlength{\myftboxwidth}
 \newlength{\myftboxmaxwidth}
 \setlength{\myftboxmaxwidth}{390pt}
@@ -332,16 +373,18 @@
 % und wiederverwendet. Dazu werden die folgenden Bezeichner verwendet:
 %
 % npbtlogo                :
-% npbtlogoline            :
-% npbtalternativelogoline :
 %
 % Mit dem Befehl "\updateNPBTimages" werden diese Bezeichner auf die aktuellen
 % Werte gesetzt, falls diese durch themes geändert werden/wurden.
 %
+\newlength{\logowidthheight}
+
 \newcommand*{\updateNPBTimages}{%
-  \pgfdeclareimage[width=1.4\logowidth,height=1.4\logoheight]{npbtlogo}{\logoimage}
-  \pgfdeclareimage[width=0.86\paperwidth]{npbtlogoline}{\lineimage}
-  \pgfdeclareimage[width=0.86\paperwidth, height=1.25em]{npbtalternativelogoline}{\frametitlebackgroundimage}
+  \setlength{\logowidthheight}{1.0cm}
+  \pgfdeclareimage[%
+        width=\logowidthheight,
+        height=\logowidthheight
+    ]{npbtlogo}{\logoimage}
 }
 
 \updateNPBTimagespaths{}
@@ -352,26 +395,16 @@
 % logoline
 %
 
-\newcommand{\logoline}{%
-  \pgfuseimage{npbtlogoline}
-}
-
-\newcommand{\putLogo}{%
-  \node[%
+\newcommand{\showLogoRightSide}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[%
     shift={(\logoxshift,\logoyshift)},
     inner sep=0pt
-  ] at (current page.north east){%
+    ] at (current page.north east){%
       \pgfuseimage{npbtlogo}
-  };%
-}
+    };%
+  \end{tikzpicture}
 
-\newcommand{\setLogo}{%
-  \begin{tikzpicture}[%
-      remember picture, 
-      overlay
-    ]
-      \putLogo%
-  \end{tikzpicture}%
 }
 
 % ---------------------------------------------------------------------------
@@ -396,7 +429,7 @@
     \node[inner sep=0pt] at (current page.center){%
               \includegraphics[width=\myPaperWidth,height=\myPaperHeight]{\backgroundimage}%
       };%
-    \putLogo%
+    \showLogoRightSide%
     \node[%
       anchor=south east,
       xshift=-1.95cm,
@@ -427,7 +460,6 @@
 \defbeamertemplate{headline}{sectioninhead}{%
   \nointerlineskip%
   \begin{beamercolorbox}[%
-      %ht=3.00em, %3.25em, %3em sollten eigentlich etwa 1,29168ex sein
       ht=6.0ex,
       dp=1ex,
       sep=0.1pt, %
@@ -435,11 +467,11 @@
       rightskip=\myrightskip, %
   ]{headline}
     {%
-      \vspace*{3ex}% Keine Ahnung wieso, aber ...
-      \vspace*{-4.5ex}% ... es hat den Effekt, den ich haben will.
       \usebeamercolor[fg]{section in head}%
       \usebeamerfont{section in head}%
+      \ifthenelse{\equal{\thesection}{0}}{}{%
       \thesection.~\NoHyper\insertsection\endNoHyper\phantom{X}%
+      }
     }%
   \end{beamercolorbox}%
   \nointerlineskip%
@@ -455,8 +487,9 @@
       leftskip=\myleftskip, %
       rightskip=\myrightskip, %
   ]{headline}
-  \phantom{X}
-  \end{beamercolorbox}
+  \phantom{X}%
+  \end{beamercolorbox}%
+  \nointerlineskip%
 }
 
 \defbeamertemplate{headline}{minimal}{
@@ -472,48 +505,88 @@
   \insertframetitle%
 }
 
+\newlength{\mytitleboxlength}
+\newlength{\npbttitleboxheight}
+
 \defbeamertemplate{frametitle}{normal}{%
+    %\definecolor{FOMFrametitelColor}{HTML}{128977}%
+    \setlength{\mytitleboxlength}{\textwidth}%
+    \addtolength{\mytitleboxlength}{-1.4cm}%
   \npbtexercisemodefalse%
   \makeatletter%
   \expandarg%
-  \IfSubStr*{\beamer@frametitle}{bung}{\npbtexercisemodetrue}{}%
-  \IfBeginWith*{\beamer@frametitle}{Offene}{\npbtexercisemodetrue}{}%
+  \let\tmp\insertframetitle%
+  \IfSubStr*{\tmp}{bung}{\npbtexercisemodetrue}{}%
+  \IfBeginWith*{\tmp}{Offene}{\npbtexercisemodetrue}{}%
   \makeatother%
   \savebox{\myftbox}{%
-      \ifnpbtexercisemode\usebeamercolor[fg]{frametitle in head exercise}\else\usebeamercolor[fg]{frametitle in head}\fi%
-      \ifnpbtexercisemode\usebeamerfont{frametitle in head exercise}\else\usebeamerfont{frametitle in head}\fi%
-      \insertframetitle}% end of savebox!
+      \ifnpbtexercisemode{%
+        \usebeamercolor[fg]{frametitle in head exercise}%
+        \usebeamerfont{frametitle in head exercise}%
+        \insertframetitle\phantom{Üj}%
+      }\else{%
+        \usebeamercolor[fg]{frametitle in head}%
+        \usebeamerfont{frametitle in head}%
+        \insertframetitle\phantom{Üj}%
+     }\fi%
+     }% end of savebox!
+  \savebox{\maxheightbox}{%
+    \ifnpbtexercisemode{%
+        \usebeamercolor{frametitle in head exercise}%
+        \usebeamerfont{frametitle in head exercise}%
+      }\else{%
+        \usebeamercolor{frametitle in head}%
+        \usebeamerfont{frametitle in head}%
+     }\fi%
+     XÜygfÄÖß!qpjJ}%
+  \usebeamercolor{frametitle in head exercise}
+  \settoheight{\npbttitleboxheight}{\maxheightbox}%
   \ifnpbtexercisemode{%
+    \addtolength{\npbttitleboxheight}{3pt}
     \begin{tikzpicture}[remember picture, overlay]
-        \node[anchor=west, inner sep=0pt, yshift=-\logoheight+5pt] at (current page.north west){%
-            \pgfuseimage{npbtalternativelogoline}
+        \node[anchor=west, inner sep=0pt, xshift=0.32cm, yshift=-\logoheight+1pt] at (current page.north west){%
+            \usebeamerfont{frametitle in head exercise}%
+            \usebeamercolor{frametitle in head exercise}%
+            \colorbox{bg}{\makebox[\mytitleboxlength][l]{\parbox[b][\npbttitleboxheight][c]{0pt}{}}}
           };%
     \end{tikzpicture}%
-    \vskip-43pt%
-  }\else\fi% end of ifnpbtexercisemode
+  }\else {
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=west, inner sep=0pt, xshift=0.32cm, yshift=-\logoheight-3pt] at (current page.north west){%
+            \usebeamerfont{frametitle in head}%
+            \usebeamercolor{frametitle in head}%
+            \addtolength{\mytitleboxlength}{4pt}%
+            \parbox[b][\npbttitleboxheight][c]{0pt}{}\hspace{-4pt}
+            {\textcolor{fg}{\rule{\mytitleboxlength}{1pt}}}
+          };%
+    \end{tikzpicture}%
+  }\fi% end of ifnpbtexercisemode
+  \vskip-4.0\npbttitleboxheight%
+  \vskip1px%
   \settowidth{\myftboxwidth}{\usebox{\myftbox}}%
   \vskip6pt\vskip0pt%
   \begin{beamercolorbox}[%
-      ht=1.20em, %
+      %ht=1.20em, %
       sep=0pt, %
-      leftskip=\myleftskip, %
-      rightskip=\myrightskip, %
-      wd=\paperwidth %
+      %leftskip=\myleftskip, %
+      %rightskip=\myrightskip%, %
+      %wd=\mytitleboxlength %
     ]{frametitle}%
-      \ifdim\myftboxwidth>\myftboxmaxwidth%
-        \resizebox{\myftboxmaxwidth}{!}{\usebox{\myftbox}}\\[-0.85em]
+    \ifnpbtexercisemode{%
+        \usebeamercolor[fg]{frametitle in head exercise}%
+        \usebeamerfont{frametitle in head exercise}%
+      }\else{%
+        \usebeamercolor[fg]{frametitle in head}%
+        \usebeamerfont{frametitle in head}%
+     }\fi%
+      \ifdim\myftboxwidth>\mytitleboxlength%
+        \resizebox{\mytitleboxlength}{!}{\usebox{\myftbox}}\\[-0.85em]
       \else%
         \usebox{\myftbox}\\[-0.85em]
       \fi
-      \ifnpbtexercisemode\else\logoline\fi%
   \end{beamercolorbox}%
-  \begin{tikzpicture}[%
-      remember picture, %
-      overlay %
-    ]
-      \putLogo%
-  \end{tikzpicture}%
-  \vskip-1.05em\vskip0pt%
+  \showLogoRightSide%
+  \vskip0pt%
 }
 
 % ---------------------------------------------------------------------------
@@ -526,6 +599,8 @@
 
 \defbeamertemplate{footline}{normal}{% Skip first frame == Title frame !!!
 %    \leavevmode%
+    \setlength{\mytitleboxlength}{\textwidth}%
+    \addtolength{\mytitleboxlength}{-0.8cm}%
     \ifthenelse{\equal{\insertframenumber}{1}}{%
     }{%
       \begin{beamercolorbox}[%
@@ -533,7 +608,10 @@
           leftskip=\myleftskip,
           rightskip=\myrightskip
         ]{footline}
-        \logoline%
+            \usebeamerfont{frametitle in head}%
+            \usebeamercolor{frametitle in head}%
+            \addtolength{\mytitleboxlength}{4pt}%
+            {\textcolor{fg}{\rule{\mytitleboxlength}{1pt}}}%
       \end{beamercolorbox}%
       \begin{beamercolorbox}[%
           ht=1.25ex, 
@@ -646,6 +724,7 @@
 %
 % Note page (default) updated!
 %
+\newsavebox{\mytempbox}
 \defbeamertemplate{note page}{mydefault}
 {%
   {%
@@ -670,18 +749,18 @@
     \nointerlineskip
     \vbox to .25\paperheight{\vskip0.5em
       \hbox{\insertshorttitle[width=8cm]}%
-      \setbox\beamer@tempbox=\hbox{\insertsection}%
-      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip4pt\raise3pt\hbox{\vrule
+      \setbox\mytempbox=\hbox{\insertsection}%
+      \hbox{\ifdim\wd\mytempbox>1pt{\hskip4pt\raise3pt\hbox{\vrule
             width0.4pt height7pt\vrule width 9pt
             height0.4pt}}\hskip1pt\hbox{\begin{minipage}[t]{7.5cm}\def\breakhere{}\insertsection\end{minipage}}\fi%
       }%
-      \setbox\beamer@tempbox=\hbox{\insertsubsection}%
-      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip17.4pt\raise3pt\hbox{\vrule
+      \setbox\mytempbox=\hbox{\insertsubsection}%
+      \hbox{\ifdim\wd\mytempbox>1pt{\hskip17.4pt\raise3pt\hbox{\vrule
             width0.4pt height7pt\vrule width 9pt
             height0.4pt}}\hskip1pt\hbox{\begin{minipage}[t]{7.5cm}\def\breakhere{}\insertsubsection\end{minipage}}\fi%
       }%
-      \setbox\beamer@tempbox=\hbox{\insertshortframetitle}%
-      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip30.8pt\raise3pt\hbox{\vrule
+      \setbox\mytempbox=\hbox{\insertshortframetitle}%
+      \hbox{\ifdim\wd\mytempbox>1pt{\hskip30.8pt\raise3pt\hbox{\vrule
             width0.4pt height7pt\vrule width 9pt
             height0.4pt}}\hskip1pt\hbox{\insertshortframetitle[width=7cm]}\fi%
       }%
@@ -729,8 +808,12 @@
     \setbeamertemplate{section page}[normal]%
 }
 \setNPBTnormal{}
+%\setNPBTminimal{}
+%\setbeamertemplate{frametitle}[normal]%
 %
 \InputIfFileExists{customize_theme.tex}{\relax}{\relax}
+
+\usecolortheme{NPBT-SC}
 
 % = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 \mode<all>
