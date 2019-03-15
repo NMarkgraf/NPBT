@@ -131,12 +131,12 @@
 % ===========
 %
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-\ifxetex% XeLaTeX Fontsetting                                               %
-% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-\usepackage{xltxtra}
+% XeLaTeX Fontsetting 
+\ifxetex\usepackage{xltxtra}%
 % Now done via _output.yaml ! 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-\else%    pdf-LaTeX Fontsetting                                             % 
+%    pdf-LaTeX Fontsetting  
+\else\relax%                     % 
 % . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 % # Latin Modern
 % Die LaTeX Standardschrift ist die Latin Modern (lmodern Paket).
@@ -154,11 +154,10 @@
 
 % . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 % # Palantino: Serifen für die Mathematischen Formeln (pplx, pplj)
-\ifxetex\relax\else
-\usepackage[%
-  osf,
-  sc
-]{mathpazo} 
+  \usepackage[%
+    osf,
+    sc
+  ]{mathpazo} 
 \fi
 %\renewcommand{\sfdefault}{pplx}
 %\renewcommand{\sfdefault}{pplj}
@@ -199,7 +198,6 @@
 % \euro in UTF-8 als Standard-Eurozeichen definieren
 %
   \DeclareUnicodeCharacter{20AC}{\euro}
-
 %
 \fi
 
@@ -251,7 +249,10 @@
     
 }
 \makeatother
-\geometry{paperwidth=\myPaperWidth,paperheight=\myPaperHeight}
+\geometry{%
+    paperwidth=\myPaperWidth,  %
+    paperheight=\myPaperHeight %
+}
 
 \newcommand*{\setScreenRatio}[1]{%
 %
@@ -284,7 +285,10 @@
 		\typeout{Set ScreenRatio to default (140x105)}
 	}
 }
-\geometry{paperwidth=\myPaperWidth,paperheight=\myPaperHeight}
+  \geometry{%
+    paperwidth=\myPaperWidth,  %
+    paperheight=\myPaperHeight %
+  }
 }
 
 %\setScreenRatio{4x3}
@@ -352,10 +356,6 @@
 \usepackage{array}
 \usepackage{xstring}
 
-%\ifstrempty{\insertinstitute}{%
-%  \institute{Standort Köln}%
-%}{\relax}
-
 % ---------------------------------------------------------------------------
 %
 % Übungen und offene Übungen haben bei der FOM einen etwas anderen 
@@ -404,7 +404,6 @@
       \pgfuseimage{npbtlogo}
     };%
   \end{tikzpicture}
-
 }
 
 % ---------------------------------------------------------------------------
@@ -429,7 +428,6 @@
     \node[inner sep=0pt] at (current page.center){%
               \includegraphics[width=\myPaperWidth,height=\myPaperHeight]{\backgroundimage}%
       };%
-    \showLogoRightSide%
     \node[%
       anchor=south east,
       xshift=-1.95cm,
@@ -451,6 +449,7 @@
         \end{minipage}    
     };%
   \end{tikzpicture}%
+  \showLogoRightSide%
 }
 
 % ---------------------------------------------------------------------------
@@ -509,9 +508,8 @@
 \newlength{\npbttitleboxheight}
 
 \defbeamertemplate{frametitle}{normal}{%
-    %\definecolor{FOMFrametitelColor}{HTML}{128977}%
-    \setlength{\mytitleboxlength}{\textwidth}%
-    \addtolength{\mytitleboxlength}{-1.4cm}%
+  \setlength{\mytitleboxlength}{\textwidth}%
+  \addtolength{\mytitleboxlength}{-1.4cm}%
   \npbtexercisemodefalse%
   \makeatletter%
   \expandarg%
@@ -562,7 +560,9 @@
     \end{tikzpicture}%
   }\fi% end of ifnpbtexercisemode
   \vskip-4.0\npbttitleboxheight%
-  \vskip1px%
+  \ifxetex\vskip-2pt%
+  \else\vskip1px%
+  \fi%
   \settowidth{\myftboxwidth}{\usebox{\myftbox}}%
   \vskip6pt\vskip0pt%
   \begin{beamercolorbox}[%
@@ -615,7 +615,6 @@
       \end{beamercolorbox}%
       \begin{beamercolorbox}[%
           ht=1.25ex, 
-          %dp=2.25ex,
           dp=1.35ex,
           leftskip=\myleftskip,
           rightskip=\myrightskip
@@ -807,9 +806,8 @@
     \setbeamertemplate{frametitle}[normal]%
     \setbeamertemplate{section page}[normal]%
 }
+\setNPBTminimal{}
 \setNPBTnormal{}
-%\setNPBTminimal{}
-%\setbeamertemplate{frametitle}[normal]%
 %
 \InputIfFileExists{customize_theme.tex}{\relax}{\relax}
 
